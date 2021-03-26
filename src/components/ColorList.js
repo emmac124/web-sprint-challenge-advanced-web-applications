@@ -25,7 +25,7 @@ const ColorList = ({ colors, updateColors }) => {
       .put(`/colors/${colorToEdit.id}`, colorToEdit)
       .then(res => {
         console.log("COLOR LIST", res);
-        setColorToEdit(res.data);
+        updateColors(res.data);
         push('/bubble-page');
       })
       .catch(err => {
@@ -33,22 +33,34 @@ const ColorList = ({ colors, updateColors }) => {
       })
   };
 
-  const deleteColorHelper = (color) => {
-    updateColors(colors.filter(indivColor => (
-      indivColor.color !== color 
-    )))
-  }
+  // const deleteColorHelper = (color) => {
+  //   updateColors(colors.filter(indivColor => (
+  //     indivColor.color !== color 
+  //   )))
+  // }
+
+  // const deleteColor = color => {
+  //   axiosWithAuth()
+  //     .delete(`/colors/${color.id}`)
+  //     .then(res => {
+  //       deleteColorHelper(color.id);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     })
+  // };
 
   const deleteColor = color => {
-    axiosWithAuth()
-      .delete(`/colors/${color.id}`)
-      .then(res => {
-        deleteColorHelper(color.id);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  };
+      axiosWithAuth()
+       .delete(`/colors/${color.id}`)
+       .then(res => {
+          console.log("DELETE", res.data);
+          updateColors(res.data)
+        })
+       .catch(err => {
+         console.log(err);
+        })
+  }
 
   return (
     <div className="colors-wrap">

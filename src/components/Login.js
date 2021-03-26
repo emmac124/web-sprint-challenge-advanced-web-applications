@@ -38,10 +38,6 @@ const Login = (props) => {
         setError(err.response.data);
       })
   };
-  
-  
-  // const error = '';
-  //replace with error state
 
   return (
     <div>
