@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 
 const initialFormValues = {
   username: '',
   password: '',
+}
+
+const initialError = {
   error: ''
 }
 
 const Login = (props) => {
 
   const [formValues, setFormValues] = useState(initialFormValues);
-  const { push } = useHistory();
+  const [error, setError] = useState(initialError);
 
   const handleChange = (e) => {
     setFormValues({
@@ -33,11 +35,12 @@ const Login = (props) => {
       })
       .catch(err => {
         console.log(err.response);
+        setError(err.response.data);
       })
   };
   
   
-  const error = '';
+  // const error = '';
   //replace with error state
 
   return (
@@ -52,16 +55,18 @@ const Login = (props) => {
             name='username'
             type='text'
             onChange={handleChange}
-            value={formValues.username} />
+            value={formValues.username}
+             />
           <label htmlFor='password'>Password:</label>
             <input
             data-testid="password"
             name='password'
             type='password'
             onChange={handleChange}
-            value={formValues.password} />
+            value={formValues.password}
+            />
         </div>
-        <p data-testid="errorMessage" className="error">{error}</p>
+        <p data-testid="errorMessage" className="error">{error.error}</p>
         <button>Login</button>
       </form>
     </div>

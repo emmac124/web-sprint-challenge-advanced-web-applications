@@ -43,7 +43,7 @@ const ColorList = ({ colors, updateColors }) => {
     axiosWithAuth()
       .delete(`/colors/${color.id}`)
       .then(res => {
-        deleteColorHelper(color.id)
+        deleteColorHelper(color.id);
       })
       .catch(err => {
         console.log(err);
